@@ -34,8 +34,7 @@ class FaqController extends Controller
     public function store(Request $request)
     {
         Faq::create($request->all());
-        Alert::Success('Success', 'faq Anda Berhasil Disimpan');
-        // $post->tags()->attach($request->tags);
+        Alert::Success('Success', 'FAQ Anda Berhasil Disimpan');
         return redirect()->back();
     }
 
@@ -59,7 +58,7 @@ class FaqController extends Controller
         $faq = faq::findorfail($id);
         $faq->update($request->except('_token'));
 
-        Alert::Success('Success', 'Faq Anda Berhasil DiUpdate');
+        Alert::Success('Success', 'FAQ Anda Berhasil DiUpdate');
         return redirect()->route('admin.faq.index');
     }
 
@@ -73,7 +72,7 @@ class FaqController extends Controller
     {
         $faq = Faq::findorfail($id);
         $faq->delete();
-        Alert::Error('Delete', 'Faq Berhasil Dihapus');
+        Alert::Error('Delete', 'FAQ Berhasil Dihapus');
         return redirect()->back();
     }
 }

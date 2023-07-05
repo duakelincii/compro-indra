@@ -89,6 +89,26 @@
                         <i class="fas fa-file"></i>
                         <span>Faq</span></a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{route('admin.gallery.index')}}">
+                        <i class="fas fa-file"></i>
+                        <span>Gallery</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{route('admin.product.index')}}">
+                        <i class="fas fa-cart"></i>
+                        <span>Product</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{route('admin.url.index')}}">
+                        <i class="fas fa-file"></i>
+                        <span>URL</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{route('admin.about.index')}}">
+                        <i class="fas fa-file"></i>
+                        <span>About</span></a>
+                </li>
 
 
 

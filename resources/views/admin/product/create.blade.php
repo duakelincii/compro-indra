@@ -1,9 +1,9 @@
 <div class="p2">
-    <form action="{{route('admin.url.store')}}" method="POST" enctype="multipart/form-data">
+    <form action="{{route('admin.product.store')}}" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="form-group row">
             <div class="col-sm-12 mb-3 mb-sm-0">
-                <label for="">Name</label>
+                <label for="">Nama Product</label>
                 <input type="text" name="name" placeholder="name....." class="form-control" required>
                 @error('name')
                     <span class="invalid-feedback" role="alert" <strong>{{ $message }}</strong>
@@ -13,9 +13,19 @@
         </div>
         <div class="form-group row">
             <div class="col-sm-12 mb-3 mb-sm-0">
-                <label for="">Url <sup style="color: red">*Contoh: https:://eazygo.id</sup></label>
-                <input type="text" name="url" class="form-control" required>
-                @error('url')
+                <label for="">Price</label>
+                <input type="number" name="price" class="form-control" required>
+                @error('price')
+                    <span class="invalid-feedback" role="alert" <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-sm-12 mb-3 mb-sm-0">
+                <label for="">Gambar</label>
+                <input type="file" name="img" accept="image/jpg,image/png,image/jpeg" class="form-control" required>
+                @error('img')
                     <span class="invalid-feedback" role="alert" <strong>{{ $message }}</strong>
                     </span>
                 @enderror

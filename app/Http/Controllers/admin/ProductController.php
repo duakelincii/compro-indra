@@ -34,8 +34,8 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'title' => 'required',
-            'desc' => 'required',
+            'name' => 'required',
+            'price' => 'required',
             'img' => 'mimes:png,jpg,jpeg|required'
         ]);
 
@@ -43,16 +43,14 @@ class ProductController extends Controller
         $new_gambar = date('siHdmY') . $gambar->getClientOriginalName();
 
         $post = Product::create([
-            'title' => $request->title,
-            'desc' => $request->desc,
+            'name' => $request->name,
+            'price' => $request->price,
             'img' => 'uploads/posts/product/' . $new_gambar,
-            'status' => 0
         ]);
 
         $gambar->move(public_path('uploads/posts/product/'), $new_gambar);
 
         Alert::Success('Success', 'product Anda Berhasil Disimpan');
-        // $post->tags()->attach($request->tags);
         return redirect()->back();
     }
 
@@ -72,11 +70,6 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // dd($request->all());
-        $this->validate($request, [
-            'title' => 'required',
-        ]);
-
         $product = Product::findorfail($id);
 
         if ($request->hasFile('img')) {
@@ -84,14 +77,14 @@ class ProductController extends Controller
             $new_gambar = date('siHdmY') . $gambar->getClientOriginalName();
             $gambar->move(public_path('uploads/posts/product/'), $new_gambar);
             $post_data = [
-                'title' => $request->title,
-                'desc' => $request->text,
+                'name' => $request->name,
+                'price' => $request->price,
                 'img' => 'uploads/posts/product/' . $new_gambar,
             ];
         } else {
             $post_data = [
-                'title' => $request->title,
-                'desc' => $request->text,
+                'name' => $request->name,
+                'price' => $request->price,
             ];
         }
 

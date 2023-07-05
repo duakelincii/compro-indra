@@ -9,6 +9,7 @@ use App\Http\Controllers\admin\ProductController;
 use App\Http\Controllers\admin\ServiceController;
 use App\Http\Controllers\admin\UrlController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\user\HomeController as UserHomeController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -27,7 +28,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-
+Route::get('/',[UserHomeController::class,'index'])->name('welcome');
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::prefix('admin')->group(function () {

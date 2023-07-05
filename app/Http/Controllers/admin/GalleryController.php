@@ -33,20 +33,11 @@ class GalleryController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, [
-            'title' => 'required',
-            'desc' => 'required',
-            'img' => 'mimes:png,jpg,jpeg|required'
-        ]);
-
         $gambar = $request->img;
         $new_gambar = date('siHdmY') . $gambar->getClientOriginalName();
 
         $post = Gallery::create([
-            'title' => $request->title,
-            'desc' => $request->desc,
             'img' => 'uploads/posts/gallery/' . $new_gambar,
-            'status' => 0
         ]);
 
         $gambar->move(public_path('uploads/posts/gallery/'), $new_gambar);
@@ -72,10 +63,6 @@ class GalleryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // dd($request->all());
-        $this->validate($request, [
-            'title' => 'required',
-        ]);
 
         $gallery = Gallery::findorfail($id);
 
@@ -84,14 +71,7 @@ class GalleryController extends Controller
             $new_gambar = date('siHdmY') . $gambar->getClientOriginalName();
             $gambar->move(public_path('uploads/posts/gallery/'), $new_gambar);
             $post_data = [
-                'title' => $request->title,
-                'desc' => $request->text,
                 'img' => 'uploads/posts/gallery/' . $new_gambar,
-            ];
-        } else {
-            $post_data = [
-                'title' => $request->title,
-                'desc' => $request->text,
             ];
         }
 

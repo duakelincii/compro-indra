@@ -1,10 +1,10 @@
 <div class="p2">
-    <form action="{{route('admin.faq.update',$item->id)}}" method="POST">
+    <form action="{{route('admin.product.update',$item->id)}}" method="POST">
         @csrf
         @method('put')
         <div class="form-group row">
             <div class="col-sm-12 mb-3 mb-sm-0">
-                <label for="">Name</label>
+                <label for="">Nama Product</label>
                 <input type="text" name="name" placeholder="name....." value="{{$item->name}}" class="form-control">
                 @error('name')
                     <span class="invalid-feedback" role="alert" <strong>{{ $message }}</strong>
@@ -14,9 +14,19 @@
         </div>
         <div class="form-group row">
             <div class="col-sm-12 mb-3 mb-sm-0">
-                <label for="">URL</label>
-                <input type="text" name="url" value="{{$item->url}}" class="form-control">
-                @error('url')
+                <label for="">Price</label>
+                <input type="number" name="price" value="{{$item->price}}" class="form-control">
+                @error('desc')
+                    <span class="invalid-feedback" role="alert" <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-sm-12 mb-3 mb-sm-0">
+                <label for="">Gambar</label>
+                <input type="file" name="img" accept="image/jpg,image/png,image/jpeg" value="{{$item->img}}" class="form-control">
+                @error('img')
                     <span class="invalid-feedback" role="alert" <strong>{{ $message }}</strong>
                     </span>
                 @enderror
