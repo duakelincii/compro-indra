@@ -12,34 +12,56 @@
             </div>
         </div>
         <div class="card-body">
-            <div class="table-responsive">
-                <div id="read">
-                    <table class="table table-bordered table-md">
-                        <tr>
-                            <th>#</th>
-                            <th>Nama</th>
-                            <th>Text</th>
-                            <th>Gambar</th>
-                            <th>Action</th>
-                        </tr>
-                        @foreach ($Data as $item)
-                            <tr>
-                                <td>{{ $loop->iteration }}</td>
-                                <td>{{ $item->title }}</td>
-                                <td>{{ $item->desc }}</td>
-                                <td width="30%"><img src="{{asset($item->img)}}" width="30%"></td>
-                                <td>
-                                    <button class="btn btn-circle btn-warning" onClick="show({{ $item->id }})"><i
-                                            class="fa fa-edit"></i></button>
-                                    <a href="javascript:;" data-toggle="modal" onclick="deleteData({{ $item->id }})"
-                                        data-target="#DeleteModal" class="btn btn-circle btn-danger"><i class="fa fa-trash"></i></a>
-                                </td>
-                            </tr>
-                        @endforeach
-                    </table>
+                <form action="{{route('admin.banner.status')}}" onsubmit="return check_mark();" method="post">
+                    @csrf
+                    <select class="browser-default custom-select w-25 mb-3" name="status_type">
+                        <option selected value="null" readonly>Mark Data Status Menjadi</option>
+                        <option value="1">Active</option>
+                        <option value="0">Tidak</option>
+                    </select>
 
+                    <button class="btn btn-success mb-3">Apply</button>
+                <div class="table-responsive">
+                    <div id="read">
+                        <table class="table table-bordered table-md">
+                            <tr>
+                                <th>#</th>
+                                <th>Nama</th>
+                                <th>Status</th>
+                                <th>Gambar</th>
+                                <th>Action</th>
+                            </tr>
+                            @foreach ($Data as $item)
+                                <tr>
+                                    <td>
+                                        <div class="custom-control custom-checkbox ml-2">
+                                            <input type="checkbox" class="custom-control-input" name="status[{{ $item->id }}]"
+                                                id="status{{ $item->id }}">
+                                            <label class="custom-control-label" for="status{{ $item->id }}"></label>
+                                        </div>
+                                    </td>
+                                    <td>{{ $item->title }}</td>
+                                    <td>
+                                    @if ($item->status == 1)
+                                        <span class="badge badge-primary">Active</span>
+                                    @else
+                                        <span class="badge badge-danger">Deactive</span>
+                                    @endif
+                                    </td>
+                                    <td width="30%"><img src="{{asset($item->img)}}" width="30%"></td>
+                                    <td>
+                                        <button class="btn btn-circle btn-warning" onClick="show({{ $item->id }})"><i
+                                                class="fa fa-edit"></i></button>
+                                        <a href="javascript:;" data-toggle="modal" onclick="deleteData({{ $item->id }})"
+                                            data-target="#DeleteModal" class="btn btn-circle btn-danger"><i class="fa fa-trash"></i></a>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </table>
+
+                    </div>
                 </div>
-            </div>
+            </form>
         </div>
     </div>
 @endsection

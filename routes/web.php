@@ -37,6 +37,7 @@ Route::prefix('admin')->group(function () {
 Route::group(['middleware' => 'auth', 'prefix' => 'admin', 'as' => 'admin.'], function () {
     Route::get('/home', [HomeController::class, 'index'])->name('home');
     Route::resource('banner',BannerController::class);
+    Route::post('/banner/status',[BannerController::class,'status'])->name('banner.status');
     Route::resource('faq',FaqController::class);
     Route::resource('service',ServiceController::class);
     Route::resource('url',UrlController::class);

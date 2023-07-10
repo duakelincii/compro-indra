@@ -35,7 +35,6 @@ class BannerController extends Controller
     {
         $this->validate($request, [
             'title' => 'required',
-            'desc' => 'required',
             'img' => 'mimes:png,jpg,jpeg|required'
         ]);
 
@@ -44,7 +43,6 @@ class BannerController extends Controller
 
         $post = Banner::create([
             'title' => $request->title,
-            'desc' => $request->desc,
             'img' => 'uploads/posts/banner/' . $new_gambar,
             'status' => 0
         ]);
@@ -85,13 +83,11 @@ class BannerController extends Controller
             $gambar->move(public_path('uploads/posts/banner/'), $new_gambar);
             $post_data = [
                 'title' => $request->title,
-                'desc' => $request->text,
                 'img' => 'uploads/posts/banner/' . $new_gambar,
             ];
         } else {
             $post_data = [
                 'title' => $request->title,
-                'desc' => $request->text,
             ];
         }
 
@@ -113,5 +109,19 @@ class BannerController extends Controller
         $Banner->delete();
         Alert::Error('Delete', 'Banner Berhasil Dihapus');
         return redirect()->back();
+    }
+
+    public function status(Request $request)
+    {
+        $type = $request['status_type'];
+        foreach($request['status'] as $id => $status){
+           $banner = Banner::find($id);
+
+           $banner['status'] = $type;
+           $banner->save();
+
+        }
+        Alert::Success('Berhasil','Berhasil Mengupdate Status Banner');
+        return redirect(route('admin.banner.index'));
     }
 }

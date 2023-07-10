@@ -5,7 +5,7 @@
         <div class="form-group row">
             <div class="col-sm-12 mb-3 mb-sm-0">
                 <label for="">Question</label>
-                <input type="text" name="question" placeholder="question....." value="{{$item->question}}" class="form-control">
+                <textarea type="text" name="question" placeholder="question....." class="form-control">{{$item->quetion}}</textarea>
                 @error('question')
                     <span class="invalid-feedback" role="alert" <strong>{{ $message }}</strong>
                     </span>
@@ -15,7 +15,7 @@
         <div class="form-group row">
             <div class="col-sm-12 mb-3 mb-sm-0">
                 <label for="">Answer</label>
-                <input type="text" name="answer" value="{{$item->answer}}" class="form-control">
+                <textarea type="text" name="answer" class="form-control">{{$item->answer}}<textarea>
                 @error('answer')
                     <span class="invalid-feedback" role="alert" <strong>{{ $message }}</strong>
                     </span>

@@ -96,7 +96,7 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{route('admin.product.index')}}">
-                        <i class="fas fa-cart"></i>
+                        <i class="fas fa-file"></i>
                         <span>Product</span></a>
                 </li>
                 <li class="nav-item">
