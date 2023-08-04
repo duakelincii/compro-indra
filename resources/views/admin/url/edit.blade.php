@@ -1,5 +1,5 @@
 <div class="p2">
-    <form action="{{route('admin.faq.update',$item->id)}}" method="POST">
+    <form action="{{route('admin.url.update',$item->id)}}" method="POST">
         @csrf
         @method('put')
         <div class="form-group row">

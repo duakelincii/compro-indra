@@ -39,7 +39,7 @@ class BannerController extends Controller
         ]);
 
         $gambar = $request->img;
-        $new_gambar = date('siHdmY') . $gambar->getClientOriginalName();
+        $new_gambar = date('siHdmY') . '.webp';
 
         $post = Banner::create([
             'title' => $request->title,
@@ -78,8 +78,8 @@ class BannerController extends Controller
         $banner = Banner::findorfail($id);
 
         if ($request->hasFile('img')) {
-            $gambar = $request->gambar;
-            $new_gambar = date('siHdmY') . $gambar->getClientOriginalName();
+            $gambar = $request->img;
+            $new_gambar = date('siHdmY') . '.webp';
             $gambar->move(public_path('uploads/posts/banner/'), $new_gambar);
             $post_data = [
                 'title' => $request->title,
@@ -114,14 +114,13 @@ class BannerController extends Controller
     public function status(Request $request)
     {
         $type = $request['status_type'];
-        foreach($request['status'] as $id => $status){
-           $banner = Banner::find($id);
+        foreach ($request['status'] as $id => $status) {
+            $banner = Banner::find($id);
 
-           $banner['status'] = $type;
-           $banner->save();
-
+            $banner['status'] = $type;
+            $banner->save();
         }
-        Alert::Success('Berhasil','Berhasil Mengupdate Status Banner');
+        Alert::Success('Berhasil', 'Berhasil Mengupdate Status Banner');
         return redirect(route('admin.banner.index'));
     }
 }

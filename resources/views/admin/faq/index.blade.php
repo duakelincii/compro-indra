@@ -19,18 +19,21 @@
                             <th>#</th>
                             <th>Question</th>
                             <th>Answer</th>
+                            <th>Kode Bahasa</th>
                             <th>Action</th>
                         </tr>
                         @foreach ($Data as $item)
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $item->question }}</td>
+                                <td>{{ $item->lang }}</td>
                                 <td>{{ $item->answer }}</td>
                                 <td>
                                     <button class="btn btn-circle btn-warning" onClick="show({{ $item->id }})"><i
                                             class="fa fa-edit"></i></button>
                                     <a href="javascript:;" data-toggle="modal" onclick="deleteData({{ $item->id }})"
-                                        data-target="#DeleteModal" class="btn btn-circle btn-danger"><i class="fa fa-trash"></i></a>
+                                        data-target="#DeleteModal" class="btn btn-circle btn-danger"><i
+                                            class="fa fa-trash"></i></a>
                                 </td>
                             </tr>
                         @endforeach
@@ -44,7 +47,6 @@
 
 @section('script')
     <script>
-
         function create() {
             $.get("{{ url('admin/faq/create') }}", {}, function(data, status) {
                 $("#exampleModalLabel").html('Create Faq')
@@ -74,7 +76,7 @@
         }
 
         function show(id) {
-            $.get("{{ url('admin/faq/') }}/" + id +'/edit', {}, function(data, status) {
+            $.get("{{ url('admin/faq/') }}/" + id + '/edit', {}, function(data, status) {
                 $("#exampleModalLabel").html('Edit Faq')
                 $("#page").html(data);
                 $("#exampleModal").modal('show');

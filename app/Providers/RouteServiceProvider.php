@@ -60,4 +60,20 @@ class RouteServiceProvider extends ServiceProvider
             return Limit::perMinute(60)->by(optional($request->user())->id ?: $request->ip());
         });
     }
+
+    protected function mapAmpRoutes()
+    {
+        Route::group([
+            'middleware' => 'web',
+            'namespace' => $this->namespace,
+            'prefix' => 'amp',
+        ], function ($router) {
+            require base_path('routes/web.php');
+        });
+    }
+
+    public function map()
+    {
+        $this->mapAmpRoutes(); // <-- Add thiss
+    }
 }

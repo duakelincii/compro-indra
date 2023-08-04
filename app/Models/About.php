@@ -8,5 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class About extends Model
 {
     use HasFactory;
-    protected $fillable = ['desc','visi','misi'];
+    protected $fillable = ['desc', 'visi', 'misi', 'logo', 'lang'];
 }

@@ -4,114 +4,52 @@ namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\About;
+use App\Models\Message;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class AboutController extends Controller
 {
     public function index()
     {
-        $Data = About::all();
-        return view('admin.about.index', compact('Data'));
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        return view('admin.about.create');
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        $this->validate($request, [
-            'title' => 'required',
-            'desc' => 'required',
-            'img' => 'mimes:png,jpg,jpeg|required'
-        ]);
-
-        $gambar = $request->img;
-        $new_gambar = date('siHdmY') . $gambar->getClientOriginalName();
-
-        $post = About::create([
-            'title' => $request->title,
-            'desc' => $request->desc,
-            'img' => 'uploads/posts/about/' . $new_gambar,
-            'status' => 0
-        ]);
-
-        $gambar->move(public_path('uploads/posts/about/'), $new_gambar);
-
-        Alert::Success('Success', 'about Anda Berhasil Disimpan');
-        // $post->tags()->attach($request->tags);
-        return redirect()->back();
+        $data['abouts'] = about::all();
+        return view('admin.about.index', $data);
     }
 
     public function edit($id)
     {
-        $item = About::findorfail($id);
-
-        return view('admin.about.edit', compact('item'));
+        $data['item'] = about::findOrFail($id);
+        return view('admin.about.edit', $data);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
-        // dd($request->all());
-        $this->validate($request, [
-            'title' => 'required',
-        ]);
+        $abouts = about::findOrFail($id);
 
-        $about = About::findorfail($id);
+        if ($request->file('logo')) {
+            $file = $request->file('logo');
+            $extension = $file->getClientOriginalExtension(); // you can also use file name
+            $fileName = 'logo.' . $extension;
+            $path = public_path() . '/uploads/posts/about';
+            $file->move($path, $fileName);
 
-        if ($request->hasFile('img')) {
-            $gambar = $request->gambar;
-            $new_gambar = date('siHdmY') . $gambar->getClientOriginalName();
-            $gambar->move(public_path('uploads/posts/about/'), $new_gambar);
-            $post_data = [
-                'title' => $request->title,
-                'desc' => $request->text,
-                'img' => 'uploads/posts/about/' . $new_gambar,
-            ];
-        } else {
-            $post_data = [
-                'title' => $request->title,
-                'desc' => $request->text,
-            ];
+            $abouts->logo = '/uploads/posts/about/' . $fileName;
+            File::delete($abouts->logo_icon);
         }
 
-        $about->update($post_data);
-
-        Alert::Success('Success', 'about Anda Berhasil DiUpdate');
-        return redirect()->route('admin.about.index');
+        $abouts->desc = $request->get('desc');
+        $abouts->visi = $request->get('visi');
+        $abouts->misi = $request->get('misi');
+        $abouts->lang = $request->get('lang');
+        $abouts->save();
+        Alert::Success('Success', 'Data Berhasil Diupdate');
+        return redirect(route('admin.about.index'));
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
+    public function message()
     {
-        $about = About::findorfail($id);
-        $about->delete();
-        Alert::Error('Delete', 'about Berhasil Dihapus');
-        return redirect()->back();
+        $data['message'] = Message::orderBy('id', 'DESC')->get();
+        return view('admin.message.index', $data);
     }
 }

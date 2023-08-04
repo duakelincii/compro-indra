@@ -20,19 +20,22 @@
                             <th>Nama</th>
                             <th>Icon</th>
                             <th>Ket</th>
+                            <th>Kode Bahasa</th>
                             <th>Action</th>
                         </tr>
                         @foreach ($Data as $item)
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $item->title }}</td>
-                                <td><i class="{{$item->img}}"></i></td>
+                                <td><img src="{{ $item->img }}" alt="" width="30%"></td>
                                 <td>{{ $item->ket }}</td>
+                                <td>{{ $item->lang }}</td>
                                 <td>
                                     <button class="btn btn-circle btn-warning" onClick="show({{ $item->id }})"><i
                                             class="fa fa-edit"></i></button>
                                     <a href="javascript:;" data-toggle="modal" onclick="deleteData({{ $item->id }})"
-                                        data-target="#DeleteModal" class="btn btn-circle btn-danger"><i class="fa fa-trash"></i></a>
+                                        data-target="#DeleteModal" class="btn btn-circle btn-danger"><i
+                                            class="fa fa-trash"></i></a>
                                 </td>
                             </tr>
                         @endforeach
@@ -46,7 +49,6 @@
 
 @section('script')
     <script>
-
         function create() {
             $.get("{{ url('admin/service/create') }}", {}, function(data, status) {
                 $("#exampleModalLabel").html('Create service')
@@ -76,7 +78,7 @@
         }
 
         function show(id) {
-            $.get("{{ url('admin/service/') }}/" + id +'/edit', {}, function(data, status) {
+            $.get("{{ url('admin/service/') }}/" + id + '/edit', {}, function(data, status) {
                 $("#exampleModalLabel").html('Edit service')
                 $("#page").html(data);
                 $("#exampleModal").modal('show');

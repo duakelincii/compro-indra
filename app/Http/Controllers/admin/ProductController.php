@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
+use Illuminate\Support\Str;
 
 class ProductController extends Controller
 {
@@ -36,16 +37,20 @@ class ProductController extends Controller
         $this->validate($request, [
             'name' => 'required',
             'price' => 'required',
-            'img' => 'mimes:png,jpg,jpeg|required'
+            'img' => 'mimes:png,jpg,jpeg|required|max:300'
         ]);
 
         $gambar = $request->img;
-        $new_gambar = date('siHdmY') . $gambar->getClientOriginalName();
+        $new_gambar = date('siHdmY') . '.webp';
+
 
         $post = Product::create([
             'name' => $request->name,
             'price' => $request->price,
+            'slug' => Str::slug($request->name),
             'img' => 'uploads/posts/product/' . $new_gambar,
+            'meta_desc' => $request->meta_desc,
+            'lang' => $request->lang
         ]);
 
         $gambar->move(public_path('uploads/posts/product/'), $new_gambar);
@@ -74,17 +79,23 @@ class ProductController extends Controller
 
         if ($request->hasFile('img')) {
             $gambar = $request->gambar;
-            $new_gambar = date('siHdmY') . $gambar->getClientOriginalName();
+            $new_gambar = date('siHdmY') . '.webp';
             $gambar->move(public_path('uploads/posts/product/'), $new_gambar);
             $post_data = [
                 'name' => $request->name,
                 'price' => $request->price,
+                'slug' => Str::slug($request->name),
                 'img' => 'uploads/posts/product/' . $new_gambar,
+                'meta_desc' => $request->meta_desc,
+                'lang' => $request->lang
             ];
         } else {
             $post_data = [
                 'name' => $request->name,
                 'price' => $request->price,
+                'slug' => Str::slug($request->name),
+                'meta_desc' => $request->meta_desc,
+                'lang' => $request->lang
             ];
         }
 

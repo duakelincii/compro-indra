@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Blog;
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
+use Illuminate\Support\Str;
 
 class BlogController extends Controller
 {
@@ -36,24 +37,26 @@ class BlogController extends Controller
         $this->validate($request, [
             'title' => 'required',
             'desc' => 'required',
-            'img' => 'mimes:png,jpg,jpeg|required'
+            'img' => 'mimes:png,jpg,jpeg|required|max:300'
         ]);
 
         $gambar = $request->img;
-        $new_gambar = date('siHdmY') . $gambar->getClientOriginalName();
+        $new_gambar = date('siHdmY') . '.webp';
 
-        $post = Blog::create([
+        Blog::create([
             'title' => $request->title,
             'desc' => $request->desc,
+            'meta_desc' => $request->meta_decs,
+            'slug' => Str::slug($request->title),
             'img' => 'uploads/posts/blog/' . $new_gambar,
-            'status' => 0
+            'lang' => $request->lang
         ]);
 
         $gambar->move(public_path('uploads/posts/blog/'), $new_gambar);
 
         Alert::Success('Success', 'blog Anda Berhasil Disimpan');
         // $post->tags()->attach($request->tags);
-        return redirect()->back();
+        return redirect(route('admin.blog.index'));
     }
 
     public function edit($id)
@@ -81,17 +84,23 @@ class BlogController extends Controller
 
         if ($request->hasFile('img')) {
             $gambar = $request->gambar;
-            $new_gambar = date('siHdmY') . $gambar->getClientOriginalName();
+            $new_gambar = date('siHdmY') . '.webp';
             $gambar->move(public_path('uploads/posts/blog/'), $new_gambar);
             $post_data = [
                 'title' => $request->title,
-                'desc' => $request->text,
+                'desc' => $request->desc,
                 'img' => 'uploads/posts/blog/' . $new_gambar,
+                'meta_desc' => $request->meta_desc,
+                'slug' => Str::slug($request->title),
+                'lang' => $request->lang
             ];
         } else {
             $post_data = [
                 'title' => $request->title,
-                'desc' => $request->text,
+                'desc' => $request->desc,
+                'meta_desc' => $request->meta_desc,
+                'slug' => Str::slug($request->title),
+                'lang' => $request->lang
             ];
         }
 

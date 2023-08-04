@@ -48,9 +48,10 @@
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{ route('admin.home') }}">
                 <div class="sidebar-brand-icon rotate-n">
-                    <i class="fas fa-paw"></i>
+                    {{-- <i class="fas fa-paw"></i> --}}
+                    <img src="{{ asset('assets/img/logo.png') }}" alt="" width="50%">
                 </div>
-                <div class="sidebar-brand-text mx-3"><font size="2">PT SINAR JERNIH CEMERLANG</font></div>
+                {{-- <div class="sidebar-brand-text mx-3"><font size="2">PT SINAR JERNIH CEMERLANG</font></div> --}}
             </a>
 
             <!-- Divider -->
@@ -72,44 +73,80 @@
             </div>
 
 
-                <li class="nav-item">
-                    <a class="nav-link" href="{{route('admin.banner.index')}}">
-                        <i class="fas fa-paw"></i>
-                        <span>Banner</span></a>
-                </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('admin.about.index') }}">
+                    <i class="fas fa-file"></i>
+                    <span>About</span></a>
+            </li>
 
-                <li class="nav-item">
-                    <a class="nav-link" href="{{route('admin.service.index')}}">
-                        <i class="fas fa-paw"></i>
-                        <span>Service</span></a>
-                </li>
 
-                <li class="nav-item">
-                    <a class="nav-link" href="{{route('admin.faq.index')}}">
-                        <i class="fas fa-file"></i>
-                        <span>Faq</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{route('admin.gallery.index')}}">
-                        <i class="fas fa-file"></i>
-                        <span>Gallery</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{route('admin.product.index')}}">
-                        <i class="fas fa-file"></i>
-                        <span>Product</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{route('admin.url.index')}}">
-                        <i class="fas fa-file"></i>
-                        <span>URL</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{route('admin.about.index')}}">
-                        <i class="fas fa-file"></i>
-                        <span>About</span></a>
-                </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('admin.blog.index') }}">
+                    <i class="fas fa-newspaper"></i>
+                    <span>Articel Blog</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('admin.banner.index') }}">
+                    <i class="fas fa-images"></i>
+                    <span>Banner</span></a>
+            </li>
 
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('admin.service.index') }}">
+                    <i class="fas fa-paw"></i>
+                    <span>Service</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('admin.faq.index') }}">
+                    <i class="fas fa-question"></i>
+                    <span>Faq</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('admin.testimonial.index') }}">
+                    <i class="fas fa-question"></i>
+                    <span>Testimonial</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('admin.testing.index') }}">
+                    <i class="fas fa-question"></i>
+                    <span>Testing</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('admin.gallery.index') }}">
+                    <i class="fas fa-images"></i>
+                    <span>Gallery</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('admin.product.index') }}">
+                    <i class="fas fa-cart-plus"></i>
+                    <span>Product</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('admin.url.index') }}">
+                    <i class="fas fa-globe"></i>
+                    <span>URL</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('admin.tiktok.index') }}">
+                    <i class="fas fa-video"></i>
+                    <span>Tiktok Video</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('admin.embed.index') }}">
+                    <i class="fas fa-code"></i>
+                    <span>Embed</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('admin.message') }}">
+                    <i class="fas fa-envelope"></i>
+                    <span>Message</span></a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('admin.setting.index') }}">
+                    <i class="fas fa-cog"></i>
+                    <span>Setting Website</span></a>
+            </li>
 
 
 
@@ -395,6 +432,10 @@
 
     <!-- Page level custom scripts -->
     <script src="{{ asset('assets/js/demo/datatables-demo.js') }}"></script>
+
+    <script src="https://cdn.ckeditor.com/4.14.0/standard/ckeditor.js"></script>
+
+    <script async src="https://www.tiktok.com/embed.js"></script>
     @yield('script')
 
 </body>
