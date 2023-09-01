@@ -26,8 +26,8 @@
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $item->question }}</td>
-                                <td>{{ $item->lang }}</td>
                                 <td>{{ $item->answer }}</td>
+                                <td>{{ $item->lang }}</td>
                                 <td>
                                     <button class="btn btn-circle btn-warning" onClick="show({{ $item->id }})"><i
                                             class="fa fa-edit"></i></button>
@@ -56,25 +56,6 @@
         }
 
 
-        function store() {
-            var comment = $("#comment").val();
-            var faq_id = $("#faq_id").val();
-            $.ajax({
-                type: "get",
-                url: "{{ url('faq/store') }}",
-                data: {
-                    faq_id: faq_id,
-                    comment: comment,
-                },
-                success: function(data) {
-                    $(".close").click();
-                    setInterval(function() {
-                        read()
-                    }, 5000);
-                }
-            });
-        }
-
         function show(id) {
             $.get("{{ url('admin/faq/') }}/" + id + '/edit', {}, function(data, status) {
                 $("#exampleModalLabel").html('Edit Faq')
@@ -82,22 +63,6 @@
                 $("#exampleModal").modal('show');
             });
         }
-
-        function update(id) {
-            var faq = $("#faq").val();
-            $.ajax({
-                type: "get",
-                url: "{{ url('jenishewan/update') }}/" + id,
-                data: "faq=" + faq,
-                success: function(data) {
-                    $(".close").click();
-                    setInterval(function() {
-                        read()
-                    }, 5000);
-                }
-            });
-        }
-
 
         function deleteData(id) {
             var id = id;

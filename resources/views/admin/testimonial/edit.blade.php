@@ -1,12 +1,12 @@
 <div class="p2">
-    <form action="{{ route('admin.faq.update', $item->id) }}" method="POST">
+    <form action="{{ route('admin.testimonial.update', $item->id) }}" method="POST">
         @csrf
         @method('put')
         <div class="form-group row">
             <div class="col-sm-12 mb-3 mb-sm-0">
-                <label for="">Question</label>
-                <textarea type="text" name="question" placeholder="question....." class="form-control">{{ $item->quetion }}</textarea>
-                @error('question')
+                <label for="">Nama Testimonial</label>
+                <textarea type="text" name="name" placeholder="Nama Testimonial....." class="form-control">{{ $item->name }}</textarea>
+                @error('name')
                     <span class="invalid-feedback" role="alert" <strong>{{ $message }}</strong>
                     </span>
                 @enderror
@@ -14,11 +14,11 @@
         </div>
         <div class="form-group row">
             <div class="col-sm-12 mb-3 mb-sm-0">
-                <label for="">Answer</label>
-                <textarea type="text" name="answer" class="form-control">{{ $item->answer }}<textarea>
-                @error('answer')
+                <label for="">desc</label>
+                <textarea type="text" name="desc" class="form-control">{{ $item->desc }}<textarea>
+                @error('desc')
     <span class="invalid-feedback" role="alert" <strong>{{ $message }}</strong>
-                            </span>
+                                                    </span>
 @enderror
             </div>
         </div>
@@ -32,7 +32,7 @@
                 </select>
                 @error('lang')
     <span class="invalid-feedback" role="alert" <strong>{{ $message }}</strong>
-                            </span>
+                                                    </span>
 @enderror
             </div>
         </div>

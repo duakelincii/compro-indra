@@ -12,7 +12,7 @@ class BannerController extends Controller
     public function index()
     {
         $Data = Banner::all();
-        return view('admin.Banner.index', compact('Data'));
+        return view('admin.banner.index', compact('Data'));
     }
 
     /**
@@ -22,7 +22,7 @@ class BannerController extends Controller
      */
     public function create()
     {
-        return view('admin.Banner.create');
+        return view('admin.banner.create');
     }
 
     /**
@@ -58,7 +58,7 @@ class BannerController extends Controller
     {
         $item = Banner::findorfail($id);
 
-        return view('admin.Banner.edit', compact('item'));
+        return view('admin.banner.edit', compact('item'));
     }
 
     /**

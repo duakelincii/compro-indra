@@ -26,6 +26,7 @@
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $item->name }}</td>
+                                <td>{{ $item->desc }}</td>
                                 <td>{{ $item->lang }}</td>
                                 <td>
                                     <button class="btn btn-circle btn-warning" onClick="show({{ $item->id }})"><i

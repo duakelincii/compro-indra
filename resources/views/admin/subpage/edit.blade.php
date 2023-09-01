@@ -1,12 +1,12 @@
 <div class="p2">
-    <form action="{{ route('admin.faq.update', $item->id) }}" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('admin.subpage.update', $item->id) }}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('put')
         <div class="form-group row">
             <div class="col-sm-12 mb-3 mb-sm-0">
-                <label for="">Question</label>
-                <textarea name="question" class="form-control">{{ $item->question }}</textarea>
-                @error('question')
+                <label for="">Name Sub Page</label>
+                <input name="name" placeholder="name....." value="{{ $item->name }}" class="form-control">
+                @error('name')
                     <span class="invalid-feedback" role="alert" <strong>{{ $message }}</strong>
                     </span>
                 @enderror
@@ -14,9 +14,19 @@
         </div>
         <div class="form-group row">
             <div class="col-sm-12 mb-3 mb-sm-0">
-                <label for="">Answer</label>
-                <textarea name="answer" class="form-control">{{ $item->answer }}</textarea>
-                @error('answer')
+                <label for="">Type</label>
+                <input name="type" placeholder="type....." value="{{ $item->type }}" class="form-control">
+                @error('type')
+                    <span class="invalid-feedback" role="alert" <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-sm-12 mb-3 mb-sm-0">
+                <label for="">Descrition</label>
+                <textarea name="desc" id="desc" class="form-control">{!! $item->desc !!}</textarea>
+                @error('desc')
                     <span class="invalid-feedback" role="alert" <strong>{{ $message }}</strong>
                     </span>
                 @enderror

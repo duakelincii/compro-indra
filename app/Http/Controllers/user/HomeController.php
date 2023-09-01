@@ -12,6 +12,9 @@ use App\Models\Message;
 use App\Models\Product;
 use App\Models\Service;
 use App\Models\Setting;
+use App\Models\SubPage;
+use App\Models\Testimonial;
+use App\Models\Testing;
 use App\Models\Tiktok;
 use App\Models\Url;
 use Illuminate\Http\Request;
@@ -28,13 +31,15 @@ class HomeController extends Controller
 
     public function index()
     {
-        $data['product'] = Product::inRandomOrder()->paginate(3);
+        $data['product'] = Product::where('lang', $this->lang)->inRandomOrder()->paginate(3);
         $data['banner'] = Banner::where('status', 1)->get();
         $data['service'] = Service::all();
+        $data['subpage'] = SubPage::where('lang', $this->lang)->get();
         $data['blog'] = Blog::OrderBy('id', 'DESC')->where('lang', $this->lang)->paginate(3);
         $data['setting'] = Setting::first();
         $data['about'] = About::where('lang', $this->lang)->first();
         $data['faq'] = Faq::where('lang', $this->lang)->get();
+        $data['testimonial'] = Testimonial::where('lang', $this->lang)->get();
         $data['url'] = Url::all();
         $data['embed'] = Embed::all();
         $data['tiktok'] = Tiktok::where('show', true)->paginate(3);
@@ -106,6 +111,19 @@ class HomeController extends Controller
             return view('bahasa.indonesia.blogDetail', $data);
         } else {
             return view('bahasa.inggris.blogDetail', $data);
+        }
+    }
+
+    public function testing()
+    {
+        $data['testing'] = Testing::where('lang', $this->lang)->first();
+        $data['setting'] = Setting::first();
+        $data['url'] = Url::all();
+        $data['embed'] = Embed::all();
+        if ($this->lang == 'id') {
+            return view('bahasa.indonesia.testing', $data);
+        } else {
+            return view('bahasa.inggris.testing', $data);
         }
     }
 

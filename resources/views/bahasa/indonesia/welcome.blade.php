@@ -58,18 +58,18 @@
         <div class="container px-5">
             <h2 class="heading_container heading_center">{{ $setting->nama_web }} <span>Tiktok Video</span></h2>
             <div class="row gx-5">
-                <div class="col-lg-4 mb-5">
-                    @if (!empty($tiktok))
-                        @foreach ($tiktok as $data)
+                @if (!empty($tiktok))
+                    @foreach ($tiktok as $data)
+                        <div class="col-lg-4 mb-5">
                             <blockquote style="max-height: 500px;max-width: 605px;min-width: 325px;" class="tiktok-embed"
                                 cite="https://www.tiktok.com/video/{{ $data->tiktok_id }}"
                                 data-video-id="{{ $data->tiktok_id }}">
                                 <section> <a target="_blank" href="https://www.tiktok.com/?refer=embed"> </a>
                                 </section>
                             </blockquote>
-                        @endforeach
-                    @endif
-                </div>
+                        </div>
+                    @endforeach
+                @endif
             </div>
         </div>
     </section>
@@ -78,26 +78,22 @@
     <section class="about_section mt-5">
         <div class="container  ">
             <div class="row">
-                <div class="col-md-6 ">
+                {{-- <div class="col-md-6 ">
                     <div class="img-box">
                         <img src="{{ $about->logo }}" alt="">
                     </div>
-                </div>
-                <div class="col-md-6">
+                </div> --}}
+                <div class="col-md-12">
                     <div class="detail-box">
                         <div class="heading_container">
                             <h2>
                                 Tentang <span>{{ $setting->nama_web }}</span>
                             </h2>
                         </div>
-                        <p>{{ $about->desc }}</p>
+                        <div>
+                            <p>{!! $about->desc !!}</p>
+                        </div>
                     </div>
-                </div>
-                <div class="ml-3">
-                    <p>{{ $about->visi }}</p>
-                </div>
-                <div class="ml-3">
-                    <p>{{ $about->misi }}</p>
                 </div>
             </div>
         </div>
@@ -105,10 +101,45 @@
 
     <!-- end about section -->
 
+    <section>
+        <div class="faq_area section_padding_50" id="faq">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="accordion faq-accordian" id="faqAccordion">
+                            @if (count($subpage) > 0)
+                                @foreach ($subpage as $sp)
+                                    <div class="card border-0 wow fadeInUp" data-wow-delay="0.2s"
+                                        style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInUp;">
+                                        <div class="card-header" id="headingOne">
+                                            <h6 class="mb-0 collapsed" data-toggle="collapse"
+                                                data-target="#collapse{{ $sp->id }}" aria-expanded="true"
+                                                aria-controls="collapseOne">{{ $sp->name }}<span
+                                                    class="lni-chevron-up"></span></h6>
+                                        </div>
+                                        <div class="collapse" id="collapse{{ $sp->id }}" aria-labelledby="headingOne"
+                                            data-parent="#faqAccordion">
+                                            <div class="card-body">
+                                                <p>{!! $sp->desc !!}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endforeach
+                            @else
+                                <center>
+                                    <span>Tidak Memiliki Sub Halaman</span>
+                                </center>
+                            @endif
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <!-- treatment section -->
 
-    <section class="treatment_section layout_padding">
+    {{-- <section class="treatment_section layout_padding">
         <div class="side_img">
             <img src="{{ asset('front/images/service.png') }}" alt="">
         </div>
@@ -136,7 +167,7 @@
                 @endif
             </div>
         </div>
-    </section>
+    </section> --}}
 
     <!-- end treatment section -->
 
@@ -153,72 +184,25 @@
         <div class="container px-0">
             <div id="customCarousel2" class="carousel  carousel-fade" data-ride="carousel">
                 <div class="carousel-inner">
-                    <div class="carousel-item active">
-                        <div class="box">
-                            <div class="client_info">
-                                <div class="client_name">
-                                    <h5>
-                                        Morijorch
-                                    </h5>
-                                    <h6>
-                                        Default model text
-                                    </h6>
+                    @if (!empty($testimonial))
+                        @foreach ($testimonial as $item)
+                            <div class="carousel-item active">
+                                <div class="box">
+                                    <div class="client_info">
+                                        <div class="client_name">
+                                            <h5>
+                                                {{ $item->name }}
+                                            </h5>
+                                        </div>
+                                        <i class="fa fa-quote-left" aria-hidden="true"></i>
+                                    </div>
+                                    <p>
+                                        {{ $item->desc }}
+                                    </p>
                                 </div>
-                                <i class="fa fa-quote-left" aria-hidden="true"></i>
                             </div>
-                            <p>
-                                editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will
-                                uncover many web sites still in their infancy. Variouseditors now use Lorem Ipsum as their
-                                default model text, and a search for 'lorem ipsum' will uncover many web sites still in
-                                their infancy. Variouseditors now use Lorem Ipsum as their default model text, and a search
-                                for 'lorem ipsum' will uncover many web sites still in their infancy. Various
-                            </p>
-                        </div>
-                    </div>
-                    <div class="carousel-item">
-                        <div class="box">
-                            <div class="client_info">
-                                <div class="client_name">
-                                    <h5>
-                                        Rochak
-                                    </h5>
-                                    <h6>
-                                        Default model text
-                                    </h6>
-                                </div>
-                                <i class="fa fa-quote-left" aria-hidden="true"></i>
-                            </div>
-                            <p>
-                                Variouseditors now use Lorem Ipsum as their default model text, and a search for 'lorem
-                                ipsum' will uncover many web sites still in their infancy. Variouseditors now use Lorem
-                                Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web
-                                sites still in their infancy. editors now use Lorem Ipsum as their default model text, and a
-                                search for 'lorem ipsum' will uncover many web sites still in their infancy.
-                            </p>
-                        </div>
-                    </div>
-                    <div class="carousel-item">
-                        <div class="box">
-                            <div class="client_info">
-                                <div class="client_name">
-                                    <h5>
-                                        Brad Johns
-                                    </h5>
-                                    <h6>
-                                        Default model text
-                                    </h6>
-                                </div>
-                                <i class="fa fa-quote-left" aria-hidden="true"></i>
-                            </div>
-                            <p>
-                                Variouseditors now use Lorem Ipsum as their default model text, and a search for 'lorem
-                                ipsum' will uncover many web sites still in their infancy, editors now use Lorem Ipsum as
-                                their default model text, and a search for 'lorem ipsum' will uncover many web sites still
-                                in their infancy. Variouseditors now use Lorem Ipsum as their default model text, and a
-                                search for 'lorem ipsum' will uncover many web sites still in their infancy. Various
-                            </p>
-                        </div>
-                    </div>
+                        @endforeach
+                    @endif
                 </div>
                 <div class="carousel_btn-box">
                     <a class="carousel-control-prev" href="#customCarousel2" role="button" data-slide="prev">
@@ -243,7 +227,7 @@
                     <div class="col-lg-4 mb-5">
                         <div class="card h-100 shadow border-0">
                             <img class="card-img-top" src="{{ $p->img }}" alt="..." width="600px"
-                                height="200px" />
+                                height="300px" />
                             <div class="card-body p-4">
                                 <a class="text-decoration-none link-dark stretched-link" href="#">
                                     <div class="h5 card-title mb-3">{{ $p->name }}</div>
@@ -309,7 +293,7 @@
                         <!-- Section Heading-->
                         <div class="section_heading text-center wow fadeInUp" data-wow-delay="0.2s"
                             style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInUp;">
-                            <h3><span>Frequently </span> Asked Questions</h3>
+                            <h3><span>Tanya</span> Jawab Umum</h3>
                             <p></p>
                             <div class="line"></div>
                         </div>
@@ -342,8 +326,8 @@
                             data-wow-delay="0.5s"
                             style="visibility: visible; animation-delay: 0.5s; animation-name: fadeInUp;">
                             <i class="lni-emoji-sad"></i>
-                            <p class="mb-0 px-2">Can't find your answers?</p>
-                            <a href="#"> Contact us</a>
+                            <p class="mb-0 px-2">Tidak Menemukan Jawaban?</p>
+                            <a href="https://wa.me/{{ $setting->phone }}"> Hubungi Kami</a>
                         </div>
                     </div>
                 </div>

@@ -9,6 +9,7 @@ use App\Http\Controllers\admin\GalleryController;
 use App\Http\Controllers\admin\ProductController;
 use App\Http\Controllers\admin\ServiceController;
 use App\Http\Controllers\admin\SettingController;
+use App\Http\Controllers\admin\SubPageController;
 use App\Http\Controllers\admin\TestimonialController;
 use App\Http\Controllers\admin\TestingController;
 use App\Http\Controllers\admin\TiktokController;
@@ -45,6 +46,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
     Route::get('/about', [UserHomeController::class, 'about'])->name('about');
     Route::get('/blog', [UserHomeController::class, 'blog'])->name('blog');
     Route::get('/blog/{slog}', [UserHomeController::class, 'blogDetail'])->name('blogDetail');
+    Route::get('/testing', [UserHomeController::class, 'testing'])->name('testing');
     Route::get('/faq', [UserHomeController::class, 'faq'])->name('faq');
     Route::get('/contact', [UserHomeController::class, 'contact'])->name('contact');
     Route::post('/kirim/message', [UserHomeController::class, 'store'])->name('contact.store');
@@ -64,10 +66,13 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin', 'as' => 'admin.'], fu
     Route::resource('url', UrlController::class);
     Route::resource('blog', BlogController::class);
     Route::resource('product', ProductController::class);
+    Route::resource('subpage', SubPageController::class);
     Route::resource('about', AboutController::class);
     Route::get('/message', [AboutController::class, 'message'])->name('message');
     Route::resource('gallery', GalleryController::class);
     Route::resource('setting', SettingController::class);
     Route::resource('testimonial', TestimonialController::class);
     Route::resource('testing', TestingController::class);
+
+    Route::post('image-upload', [AboutController::class, 'storeImage'])->name('image.upload');
 });

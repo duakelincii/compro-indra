@@ -71,15 +71,20 @@
             <div class="sidebar-heading">
                 Menu
             </div>
-
-
             <li class="nav-item">
-                <a class="nav-link" href="{{ route('admin.about.index') }}">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
+                    aria-expanded="true" aria-controls="collapseTwo">
                     <i class="fas fa-file"></i>
-                    <span>About</span></a>
+                    <span>About</span>
+                </a>
+                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">About Page:</h6>
+                        <a class="collapse-item" href="{{ route('admin.about.index') }}">About</a>
+                        <a class="collapse-item" href="{{ route('admin.subpage.index') }}">Sub Page</a>
+                    </div>
+                </div>
             </li>
-
-
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('admin.blog.index') }}">
                     <i class="fas fa-newspaper"></i>
@@ -207,15 +212,15 @@
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="userDropdown">
-                                {{-- <a class="dropdown-item" href="#">
+                                <a class="dropdown-item" href="#">
                                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Profile
                                 </a>
-                                <a class="dropdown-item" href="#">
+                                <a class="dropdown-item" href="{{ route('admin.setting.index') }}">
                                     <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Settings
-                                </a> --}}
-                                {{-- <div class="dropdown-divider"></div> --}}
+                                </a>
+                                <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="#" data-toggle="modal"
                                     data-target="#logoutModal">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>

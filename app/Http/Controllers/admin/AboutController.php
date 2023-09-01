@@ -26,25 +26,39 @@ class AboutController extends Controller
     public function update(Request $request, $id)
     {
         $abouts = about::findOrFail($id);
-
-        if ($request->file('logo')) {
-            $file = $request->file('logo');
-            $extension = $file->getClientOriginalExtension(); // you can also use file name
-            $fileName = 'logo.' . $extension;
-            $path = public_path() . '/uploads/posts/about';
-            $file->move($path, $fileName);
-
-            $abouts->logo = '/uploads/posts/about/' . $fileName;
-            File::delete($abouts->logo_icon);
-        }
-
         $abouts->desc = $request->get('desc');
-        $abouts->visi = $request->get('visi');
-        $abouts->misi = $request->get('misi');
-        $abouts->lang = $request->get('lang');
+        $abouts->lang = $abouts->lang;
         $abouts->save();
         Alert::Success('Success', 'Data Berhasil Diupdate');
         return redirect(route('admin.about.index'));
+    }
+    public function storeImage(Request $request)
+    {
+        if ($request->hasFile('upload')) {
+            //get filename with extension
+            $filenamewithextension = $request->file('upload')->getClientOriginalName();
+
+            //get filename without extension
+            $filename = pathinfo($filenamewithextension, PATHINFO_FILENAME);
+
+            //get file extension
+            $extension = $request->file('upload')->getClientOriginalExtension();
+
+            //filename to store
+            $filenametostore = $filename . '_' . time() . '.' . $extension;
+
+            //Upload File
+            $request->file('upload')->move(public_path('/uploads/ckeditor'), $filenametostore);
+
+            $CKEditorFuncNum = $request->input('CKEditorFuncNum');
+            $url = asset('/uploads/ckeditor/' . $filenametostore);
+            $msg = 'Image successfully uploaded';
+            $re = "<script>window.parent.CKEDITOR.tools.callFunction($CKEditorFuncNum, '$url', '$msg')</script>";
+
+            // Render HTML output
+            @header('Content-type: text/html; charset=utf-8');
+            echo $re;
+        }
     }
 
     public function message()

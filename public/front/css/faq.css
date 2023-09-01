@@ -3,6 +3,10 @@
     padding-top: 130px;
     padding-bottom: 130px;
 }
+.section_padding_50 {
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
 .faq_area {
     position: relative;
     z-index: 1;

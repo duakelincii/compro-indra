@@ -20,7 +20,7 @@
 
                         <div class="collapse navbar-collapse" id="navbarSupportedContent">
                             <div class="d-flex mr-auto flex-column flex-lg-row align-items-center">
-                                <ul class="navbar-nav  ">
+                                <ul class="navbar-nav">
                                     <li class="nav-item active">
                                         <a class="nav-link" href="{{ route('welcome') }}">Home <span
                                                 class="sr-only">(current)</span></a>
@@ -30,6 +30,9 @@
                 </li> --}}
                                     <li class="nav-item">
                                         <a class="nav-link" href="{{ route('blog') }}">Articel</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{{ route('testing') }}">Testing</a>
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link" href="{{ route('contact') }}">Contact Us</a>
@@ -42,16 +45,18 @@
                                         @endforeach
                                     @endif
                                     @foreach (LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
-                                        <li class="nav-item">
-                                            <a class="nav-link" hreflang="{{ $localeCode }}"
-                                                href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}">
-                                                @if ($properties['native'] == 'Bahasa Indonesia')
-                                                    IND
-                                                @else
-                                                    ENG
-                                                @endif
-                                            </a>
-                                        </li>
+                                        <ul class="navbar-nav ml-auto">
+                                            <li class="nav-item">
+                                                <a class="nav-link" hreflang="{{ $localeCode }}"
+                                                    href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}">
+                                                    @if ($properties['native'] == 'Bahasa Indonesia')
+                                                        <sup>IND</sup>
+                                                    @else
+                                                        <sup>ENG</sup>
+                                                    @endif
+                                                </a>
+                                            </li>
+                                        </ul>
                                     @endforeach
                                 </ul>
                             </div>

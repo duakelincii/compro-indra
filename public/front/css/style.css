@@ -123,7 +123,7 @@ a:focus {
 }
 
 .header_section .header_bottom {
-  background-color: #00AFAA;
+  background-color: #ffffff;
 }
 
 .header_section .header_bottom .container-fluid {
@@ -148,7 +148,7 @@ a:focus {
 .custom_nav-container .navbar-nav .nav-item .nav-link {
   padding: 3px 15px;
   margin: 10px 15px;
-  color: #ffffff;
+  color: #00AFAA;
   text-align: center;
   text-transform: uppercase;
 }
